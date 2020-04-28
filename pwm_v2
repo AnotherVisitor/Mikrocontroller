@@ -1,0 +1,41 @@
+* name: 
+ * pwm_v2
+ *  
+ * hardware: Arduino Uno w/ attached Multifunctionshield (MFS)
+ * 
+ * comments:
+ * The default frequency of pin 5 is 980Hz.
+ * Copy the library into the working directory.
+ * You can find more details in the folder "Multi-function-shield"
+ *
+ * whats new:
+ * Just a simple loop the outputs a PWM on pin 5 of the Uno.
+ * 
+ * when:
+ * 29. April 2020
+ * 
+ * who:
+ * Heiko Wagner
+ */
+
+#include "MultiFuncShield.h"
+
+int i_counter=0;
+int i_pwmPin = 5; //default frequency is 980Hz on Timer0
+
+void setup() 
+{
+   MFS.initialize();    // initialize multi-function shield library
+   MFS.write("init");
+   delay(1000);
+} // end of setup
+  
+void loop() 
+{
+   for(i_counter=0; i_counter <= 255; i_counter+=5)
+   {
+      MFS.write((int)i_counter);
+      analogWrite(i_pwmPin, i_counter); // analogWrite values from 0 to 255
+      delay(250);
+   } // end of for
+} // end of loop
